@@ -14,7 +14,7 @@ export default function SnippetList() {
   }, []);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div className="flex flex-col h-[60vh] w-[210px] bg-red-300 rounded-xl p-3">
       {snippets.map((snippet) => (
         <SnippetListItem snippet={snippet} key={snippet.shortId} />
       ))}
