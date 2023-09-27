@@ -1,7 +1,6 @@
 import relativeDate from "../utils/relative-date";
 
 export default function SnippetListItem({ snippet, handleDelete }) {
-  console.log(snippet);
   return (
     <div style={{ border: "1px solid black", margin: "10px" }}>
       <a href={`/${snippet.shortId}`} className="underline text-blue-500 hover:text-blue-800">
