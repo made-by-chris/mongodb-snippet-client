@@ -1,7 +1,10 @@
+import { useContext } from "react";
+import { SnippetContext } from "../contexts/SnippetContext";
+import { ApplicationSettingsContext } from "../contexts/ApplicationSettingsContext";
+
 import CodeMirror from "@uiw/react-codemirror";
-// lets add the linewrap extension
-// we use the @uiw/codemirror-theme-vscode  theme
-import { vscodeDark, vscodeDarkInit } from "@uiw/codemirror-theme-vscode";
+import { vscodeDark } from "@uiw/codemirror-theme-vscode";
+import { noctisLilac } from "@uiw/codemirror-theme-noctis-lilac";
 
 // lang support
 import { markdown } from "@codemirror/lang-markdown";
@@ -26,10 +29,10 @@ const EXTENSIONS = {
   java: java(),
 };
 
-import { useContext } from "react";
-import { SnippetContext } from "../contexts/SnippetContext";
 export default function CodeBlock({ code, handleEdit }) {
   const { editor } = useContext(SnippetContext);
+  const { darkMode } = useContext(ApplicationSettingsContext);
+  const theme = darkMode ? vscodeDark : noctisLilac;
   const [snippet] = editor;
   let extensions = [];
   if (snippet.language !== "plaintext") {
@@ -40,5 +43,5 @@ export default function CodeBlock({ code, handleEdit }) {
     handleEdit(value);
   };
 
-  return <CodeMirror height="100%" className="h-screen" value={code} theme={vscodeDark} extensions={extensions} onChange={onChange} />;
+  return <CodeMirror id="cm" height="100%" className="h-screen" value={code} theme={theme} extensions={extensions} onChange={onChange} />;
 }
