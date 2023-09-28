@@ -1,5 +1,5 @@
-import { useState, createContext } from "react";
-
+import { useState, createContext, useEffect } from "react";
+import { AVAILABLE_LANGUAGES } from "../enums/editor";
 export const SnippetContext = createContext(null);
 
 export const SnippetProvider = ({ children }) => {
@@ -7,6 +7,7 @@ export const SnippetProvider = ({ children }) => {
   const [snippet, setSnippet] = useState({
     title: "",
     content: "",
+    language: AVAILABLE_LANGUAGES.javascript,
   });
 
   // for snippetsList component
