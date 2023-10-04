@@ -47,10 +47,10 @@ export const SnippetProvider = ({ children }) => {
     }).then((httpResponse) => {
       if (httpResponse.ok) {
         setSnippet(emptySnippetState);
-        setUnsavedState(false);
         setSnippetDIFF(emptySnippetState);
         history("/");
         notify("Deleted successfully!");
+        setSnippets(snippets.filter((s) => s.shortId !== snippet.shortId));
       } else {
         notify("Sorry, something went wrong. Please try again later.");
       }
@@ -79,8 +79,8 @@ export const SnippetProvider = ({ children }) => {
       })
       .then((updatedSnippet) => {
         setSnippet(updatedSnippet);
-        setUnsavedState(false);
         setSnippetDIFF(updatedSnippet);
+        setSnippets([updatedSnippet, ...snippets.filter((s) => s.shortId !== updatedSnippet.shortId)]);
       });
   };
 
@@ -101,8 +101,9 @@ export const SnippetProvider = ({ children }) => {
       .then((httpResponse) => httpResponse.json())
       .then((newlyCreatedSnippet) => {
         setSnippet(newlyCreatedSnippet);
-        setUnsavedState(false);
         setSnippetDIFF(newlyCreatedSnippet);
+
+        setSnippets([newlyCreatedSnippet, ...snippets]);
 
         history("/" + newlyCreatedSnippet.shortId);
         notify("Snippet successfully created!");
