@@ -39,6 +39,8 @@ export default function Navbar() {
         ))}
       </select>
 
+      <a href="/auth/web">LOGIN / REGISTER</a>
+
       {/* <button>FIX my code (gpt-4)</button> */}
       <button onClick={toggleDarkMode}>toggle theme</button>
       {snippet.shortId ? <button onClick={sendUpdateSnippetRequest}>Save Changes</button> : <button onClick={sendCreateSnippetRequest}>Save</button>}

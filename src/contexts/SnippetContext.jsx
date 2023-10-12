@@ -10,6 +10,7 @@ export const SnippetProvider = ({ children }) => {
   const notify = (msg) => toast(msg);
 
   const history = (path) => window.history.pushState({}, "", path);
+  // TODO FIX THIS :D
   const snippet_id = window.location.pathname.split("/")[1];
   // for the editor + navbar
   const [snippet, setSnippet] = useState(emptySnippetState);
@@ -23,7 +24,7 @@ export const SnippetProvider = ({ children }) => {
     } else {
       setUnsavedState(false);
     }
-  }, [snippet.title, snippet.content, snippet.language]);
+  }, [snippet, snippetDIFF]);
 
   useEffect(() => {
     if (snippet_id) {
